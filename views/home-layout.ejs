@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>   
+	<% include ./elements/home-layout/header-layout %>
+</head>
+
+<body>   
+    <%- body %>
+	<!--Script start-->
+	<% include ./elements/home-layout/script-layout %>
+	<!--Script end-->
+
+    <script>
+        new WOW().init();
+
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+        $('#datepicker1').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    </script>
+
+
+</body>
+
+</html>

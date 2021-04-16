@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container mt-3">
+     <h3 class="text-center">Cập nhật Chuyến Bay</h3>
+      <form action="/admin/ticket/edit" method="post">
+      <label for="idvemaybay">ID Vé Máy Bay</label>
+      <input type="text" name="idvemaybay" value="<%= data.idvemaybay %>" class="form-control" readonly>
+      <label for="idchuyenbay">ID Chuyến Bay</label>
+      <input type="text" name="idchuyenbay" value="<%= data.idchuyenbay %>" class="form-control" readonly>
+      <label for="sokghanhlymacdinh">Số lượng Kg hành lý mặc định</label>
+      <input type="text" name="sokghanhlymacdinh" value="<%= data.sokghanhlymacdinh %>" class="form-control">
+      <label for="giave">Giá vé</label>
+      <input type="text" name="giave" value="<%= data.giave %>" class="form-control">          
+      <input type="submit" value="Cập nhật" class="btn btn-primary mt-2"> <br>
+      <a href="/admin/ticket/index">Quay lại?</a>
+     </form>
+    </div>
+  </body>
+</html>
