@@ -58,12 +58,11 @@ router.post('/setbody/home', function(req, res, next) {
   res.redirect("/setbody/booknow");  
 });
 
-router.get('setbody/booking/:idvmb', function(req, res, next) {
-  dbconnect.query(`SELECT * FROM vemaybay, chuyenbay, maybay WHERE idmaynay = idmaybay AND vemaybay.idchuyenbay = chuyenbay.idchuyenbay AND vemaybay.idvemaybay = '${req.params.idvmb}'`,function(err, results){
+router.get('/setbody/booking/:idvmb', function(req, res, next) {
+  var data = dbconnect.query(`SELECT * FROM vemaybay, chuyenbay, maybay WHERE idmaynay = idmaybay AND vemaybay.idchuyenbay = chuyenbay.idchuyenbay AND idvemaybay = '${req.params.idvmb}'`,function(err, result){
     if(err) throw err;
     data = {
       idvemaybay: result[0].idvemaybay,
-      ngaybay: result[0].ngaybay,
       ngaybay: result[0].ngaybay,
       gioden: result[0].gioden,
       noidi: result[0].noidi,
@@ -76,7 +75,7 @@ router.get('setbody/booking/:idvmb', function(req, res, next) {
       giave: result[0].giave 
     }
     console.log(data);
-    res.render("/setbody/booking",{data});       
+    res.render("setbody/booking",{data});       
   })
 });
 module.exports = router;
