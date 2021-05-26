@@ -1,13 +1,12 @@
-const sql = require("mssql/msnodesqlv8");
+//const sql = require("mssql/msnodesqlv8");
+const sql = require("mssql");
 
 const pool = new sql.ConnectionPool({    
-    server: "DESKTOP-0G2IHRM\\SQLEXPRESS",
+    //server: "DESKTOP-0G2IHRM\\SQLEXPRESS",
+    user: "mykaito",
+    password: "Admin12345",
+    server: "myoka1mb.database.windows.net",
     database: "QLHeThongMayBayNodejs",
-    driver: "msnodesqlv8",
-    options: {
-        trustedConnection: true,
-        enableArithAbort: true
-    }
 });
 pool.connect(function(err){
     if(err) throw err;

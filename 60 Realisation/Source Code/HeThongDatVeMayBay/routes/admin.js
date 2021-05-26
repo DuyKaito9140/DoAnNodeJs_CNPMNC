@@ -112,13 +112,12 @@ router.get('/flight/delete/:idChuyenBay', function(req, res, next) {
 
 //----EDIT Flight---
 router.get('/flight/edit/:idChuyenBay', function(req, res, next) {
-  dbconnect.query(`SELECT * FROM CHUYENBAY, MAYBAY, HANGMAYBAY WHERE CHUYENBAY.idMayBay = MAYBAY.idMayBay AND HANGMAYBAY.idHang = MAYBAY.idHang AND idChuyenBay = '${req.params.idChuyenBay}'`,function(err, result){
+  dbconnect.query(`SELECT * FROM CHUYENBAY cb, MAYBAY mb, HANGMAYBAY hb WHERE cb.idMayBay = mb.idMayBay AND mb.idHang = hb.idHang AND idChuyenBay = '${req.params.idChuyenBay}'`,function(err, result){
     if(err) throw err;
-    console.log(result);
-    dbconnect.request().query('SELECT * FROM MAYBAY',(err, result2) => {      
+    dbconnect.request().query('SELECT * FROM MAYBAY, HANGMAYBAY WHERE MAYBAY.idHang = HANGMAYBAY.idHang',(err, result2) => {      
       if(err) throw err;              
       res.render("admin/flight/edit", {result: result, result2: result2});
-    })
+    })             
   })
 });
 router.post('/flight/edit', function(req, res, next) {
@@ -134,58 +133,76 @@ router.post('/flight/edit', function(req, res, next) {
 /*TICKET */
 /* GET DATABASE. */
 router.get('/ticket/index', function(req, res, next) {
-  dbconnect.query("SELECT * FROM vemaybay, chuyenbay, maybay WHERE idmaynay = idmaybay AND vemaybay.idchuyenbay = chuyenbay.idchuyenbay",function(err, results){
-    if(err) throw err;
-    else{
-      data = {print: results};
-      console.log(data);     
-      res.render('admin/ticket/index', data);
-    }
+  dbconnect.connect().then(() => {
+    dbconnect.query("SELECT * FROM VEMAYBAY v, CHUYENBAY c, LOAIVE l, MAYBAY m, HANGMAYBAY h WHERE v.idLoaiVe = l.idLoaiVe AND v.idChuyenBay = c.idChuyenBay AND c.idMayBay = m.idMayBay AND m.idHang = h.idHang",function(err, result){
+      if(err) throw err;
+      else{
+        res.render('admin/ticket/index', {result: result});
+      }
+    }) 
   })
 });
 
 //----ADD Ticket---
 router.get('/ticket/add', function(req, res, next) {
-  dbconnect.query(`SELECT * FROM chuyenbay, maybay WHERE idmaynay = idmaybay`,function(err, results){
-    if(err) throw err;
+  dbconnect.connect().then(() => {
+    dbconnect.query(`SELECT * FROM CHUYENBAY c, MAYBAY m, HANGMAYBAY h WHERE c.idMayBay = m.idMayBay AND m.idHang = h.idHang`,function(err, result){
+      if(err) throw err;
       else{
-        data = {print: results};
-      res.render('admin/ticket/add', data); }        
-  })
-});
-router.post('/ticket/add', function(req, res, next) {
-  var idstr = req.body.idchuyenbay;
-  var idchuyenbay = idstr.split(" ")[0];
-  var idvemaybay = randomId(len, pattern);
-  dbconnect.query(`INSERT INTO vemaybay (idvemaybay, idchuyenbay, sokghanhlymacdinh, giave) VALUES('${idvemaybay}','${idchuyenbay}','${req.body.sokghanhlymacdinh}','${req.body.giave}')`,function(err){
-    if(err) throw err;
-    res.redirect("/admin/ticket/index");
+        res.render('admin/ticket/add', {result: result});
+      }
+    }) 
   })
 });
 
+router.post('/ticket/add', function(req, res, next) {
+  var idcb = req.body.idChuyenBay.split(" ");
+  var idloaive = "";
+  var sove = 4 //db giả tạo thử 4 vé trên 1 chuyến
+  for(var i = 0; i<sove; i++){
+    var idVe = randomId(len, pattern);
+    if(i==0){
+        idloaive = "lv004";
+    }
+    else if(i==1){
+      idloaive = "lv003";
+    }
+    else if(i==2){
+      idloaive = "lv002";
+    }
+    else{
+      idloaive = "lv001";
+    }
+    dbconnect.query(`INSERT INTO VEMAYBAY (idVe, idChuyenBay, idLoaiVe, SoKgHanhLy, GiaVe) VALUES('${idVe}','${idcb[0]}','${idloaive}','${req.body.SoKgHanhLy}','${req.body.GiaVe}')`,function(err){})
+  }
+  res.redirect("/admin/ticket/index");
+});
+
 //----DELETE Ticket---
-router.get('/ticket/delete/:idvemaybay', function(req, res, next) {
-  dbconnect.query(`DELETE FROM vemaybay WHERE idvemaybay = '${req.params.idvemaybay}'`,function(err){
+router.get('/ticket/delete/:idVe', function(req, res, next) {
+  dbconnect.query(`DELETE FROM VEMAYBAY WHERE idVe = '${req.params.idVe}'`,function(err){
     if(err) throw err;
     res.redirect("/admin/ticket/index");
     })
 });
 
 //----EDIT Ticket---
-router.get('/ticket/edit/:idvemaybay', function(req, res, next) {
-  var data = dbconnect.query(`SELECT * FROM vemaybay WHERE idvemaybay = '${req.params.idvemaybay}'`,function(err, result){
-  if(err) throw err;
-  data = {
-    idvemaybay: result[0].idvemaybay,
-    idchuyenbay: result[0].idchuyenbay,
-    sokghanhlymacdinh: result[0].sokghanhlymacdinh,
-    giave: result[0].giave 
-  }
-  res.render("admin/ticket/edit",{data});
+router.get('/ticket/edit/:idVe', function(req, res, next) {
+  dbconnect.query(`SELECT * FROM VEMAYBAY v, CHUYENBAY c, LOAIVE l, MAYBAY m, HANGMAYBAY h WHERE v.idLoaiVe = l.idLoaiVe AND v.idChuyenBay = c.idChuyenBay AND c.idMayBay = m.idMayBay AND m.idHang = h.idHang AND v.idVe = '${req.params.idVe}'`,function(err, result){
+    if(err) throw err;
+    dbconnect.request().query(`SELECT * FROM LOAIVE`,(err, result2) => {      
+      if(err) throw err;              
+      dbconnect.request().query(`SELECT * FROM CHUYENBAY c, MAYBAY m, HANGMAYBAY h WHERE c.idMayBay = m.idMayBay AND m.idHang = h.idHang`,(err, result3) => {      
+        if(err) throw err;              
+        res.render("admin/ticket/edit", {result: result, result2: result2, result3: result3});
+      })
+    })
   })
 });
 router.post('/ticket/edit', function(req, res, next) {
-    dbconnect.query(`UPDATE vemaybay SET sokghanhlymacdinh = '${req.body.sokghanhlymacdinh}', giave = '${req.body.giave}'`,function(err){     
+    var idcb = req.body.idChuyenBay.split(" ");
+    var idlv = req.body.idLoaiVe.split(" ");
+    dbconnect.query(`UPDATE VEMAYBAY SET SoKgHanhLy = '${req.body.SoKgHanhLy}', GiaVe = '${req.body.GiaVe}', idChuyenBay = '${idcb[0]}', idLoaiVe = '${idlv[0]}' WHERE idVe = '${req.body.idVe}'`,function(err){     
     if(err) throw err;       
     res.redirect("/admin/ticket/index");
     })    
