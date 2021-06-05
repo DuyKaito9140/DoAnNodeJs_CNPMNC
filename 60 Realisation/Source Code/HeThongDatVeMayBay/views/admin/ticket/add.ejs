@@ -13,9 +13,11 @@
     />
   </head>
   <body>
+    <div style="width: 100%; height: 60px; background-color: #00a6ff;"></div>      
+    <br /> 
     <div class="container mt-3"> 
      <h3 class="text-center">Thêm Vé Mới</h3>
-     <form action="admin/ticket/add" method="post">
+     <form action="/ticket/add" method="post">
           <label for="idChuyenBay">Chọn chuyến bay <a style="color: red;">(Số lượng khách bằng số lượng vé sẽ được tạo của 1 chuyến bay !)</a></label>
           <select class="form-select" aria-label="Default select example" name="idChuyenBay">
             <option selected disabled="disabled">...</option>             
@@ -29,7 +31,7 @@
           <label for="GiaVe">Giá vé</label>
           <input type="text" name="GiaVe" class="form-control">                  
           <input type="submit" value="Thêm mới" class="btn btn-primary mt-2"> <br>
-          <a href="/admin/ticket/index">Quay lại?</a>
+          <a href="/ticket/index">Quay lại?</a>
      </form>
     </div>
   </body>

@@ -16,6 +16,7 @@
     "msnodesqlv8": "^2.1.0",
     "mssql": "^7.1.0",
     "mysql": "^2.18.1",
+    "node-fetch": "^2.6.1",
     "random-id": "^1.0.4",
     "tedious": "^11.0.8"
   },

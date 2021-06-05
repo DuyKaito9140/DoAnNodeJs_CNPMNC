@@ -18,7 +18,6 @@
 </head>
 
 <body>
-    <% include ./../elements/home-layout/top-menu-layout %>
     <!-- breadcrumb start -->
     <section class="breadcrumb-section flight-sec pt-0" style="height: 300px; image-rendering: pixelated;">
         <img src="../assets/images/flights/flight-breadcrumb4.jpg" class="bg-img img-fluid blur-up lazyload" alt="">
@@ -216,29 +215,7 @@
                                                     <input type="text" class="form-control" id="lastt">
                                                 </div>
                                             </div>
-                                        </form>
-                                        <form>
-                                            <h6>adult 2</h6>
-                                            <div class="row">
-                                                <div class="form-group col-md-2">
-                                                    <label for="input">title</label>
-                                                    <select id="input" class="form-control">
-                                                        <option selected>Choose...</option>
-                                                        <option>Mr.</option>
-                                                        <option>Ms.</option>
-                                                        <option>Mrs.</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-5">
-                                                    <label for="first">first name</label>
-                                                    <input type="text" class="form-control" id="first">
-                                                </div>
-                                                <div class="form-group col-md-5">
-                                                    <label for="last">last name</label>
-                                                    <input type="text" class="form-control" id="last">
-                                                </div>
-                                            </div>
-                                        </form>
+                                        </form>                         
                                         <form>
                                             <h6>contact details</h6>
                                             <div class="row">
@@ -298,25 +275,27 @@
                                         <table class="table table-borderless">
                                             <tbody>
                                                 <tr>
-                                                    <td>adults (3 X $2501)</td>
-                                                    <td>$250</td>
+                                                    <td>Giá vé mặc định: </td>
+                                                    <td><%= result.recordset[0].GiaVe %> VNĐ</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>total taxes</td>
-                                                    <td>$25</td>
+                                                    <td>Giá loại vé: </td>
+                                                    <td><%= result.recordset[0].TienTraThem %> VNĐ</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Insurance</td>
-                                                    <td>$15</td>
+                                                    <td>VAT: </td>
+                                                    <td><%= result.recordset[0].GiaVe * 0.1 %> VNĐ</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Convenience fee</td>
-                                                    <td>$18</td>
+                                                    <td>Dịch vụ: </td>
+                                                    <td><%= result.recordset[0].GiaVe * 0.05 %> VNĐ</td>
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <% var tongthanhtoan = result.recordset[0].GiaVe + result.recordset[0].TienTraThem + (result.recordset[0].GiaVe * 0.1) + (result.recordset[0].GiaVe * 0.05);
+                                        %>
                                         <div class="grand_total">
-                                            <h5>grand total: <span>$2500</span></h5>
+                                            <h5>Tổng cộng: <span style="color: brown;"><b><%= tongthanhtoan %> VNĐ</b></span></h5>
                                         </div>
                                     </div>
                                 </div>

@@ -13,9 +13,11 @@
     />
   </head>
   <body>
+    <div style="width: 100%; height: 60px; background-color: #00a6ff;"></div>      
+    <br /> 
     <div class="container mt-3">
      <h3 class="text-center">Cập nhật Chuyến Bay</h3>
-      <form action="/admin/ticket/edit" method="post">
+      <form action="/ticket/edit" method="post">
       <label for="idVe">ID Vé</label>
       <input type="text" name="idVe" value="<%= result.recordset[0].idVe %>" class="form-control" readonly>
       <label for="idLoaiVe">Loại vé</label>
@@ -39,7 +41,7 @@
       <label for="GiaVe">Giá vé</label>
       <input type="text" name="GiaVe" value="<%= result.recordset[0].GiaVe %>" class="form-control">          
       <input type="submit" value="Cập nhật" class="btn btn-primary mt-2"> <br>
-      <a href="/admin/ticket/index">Quay lại?</a>
+      <a href="/ticket/index">Quay lại?</a>
      </form>
     </div>
   </body>

@@ -13,9 +13,11 @@
     />
   </head>
   <body>
+    <div style="width: 100%; height: 60px; background-color: #00a6ff;"></div>      
+    <br /> 
     <div class="container mt-3"> 
      <h3 class="text-center">Thêm Máy Bay mới</h3>
-     <form action="admin/plane/add" method="post">        
+     <form action="/plane/add" method="post">        
          <label for="TenMayBay">Tên máy bay</label>
          <input type="text" name="TenMayBay" class="form-control">
          <label for="idHang">Hãng máy bay</label>
@@ -28,7 +30,7 @@
          <label for="SoLuongKhach">Số lượng khách tối đa</label>
          <input type="text" name="SoLuongKhach" class="form-control">
          <input type="submit" value="Thêm mới" class="btn btn-primary mt-2"> <br>
-         <a href="/admin/plane/index">Quay lại?</a>
+         <a href="/plane/index">Quay lại?</a>
      </form>
     </div>
   </body>
