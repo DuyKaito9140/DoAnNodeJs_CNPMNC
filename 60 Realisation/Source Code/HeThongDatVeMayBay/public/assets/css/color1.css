@@ -140,10 +140,6 @@ button:focus,
   -webkit-box-shadow: none;
           box-shadow: none; }
 
-section,
-.section-t-space {
-  padding-top: 100px; }
-
 .section_space {
   padding-top: calc(30px + (100 - 30) * ((100vw - 320px) / (1920 - 320))); }
 

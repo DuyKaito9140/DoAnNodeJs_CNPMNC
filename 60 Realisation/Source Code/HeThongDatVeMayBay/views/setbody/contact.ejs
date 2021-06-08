@@ -1,19 +1,23 @@
-<head>  
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    /> 
-    
-  </head>
-<section class="blog_section destination-section section-b-space ratio_55">
+<style>
+    #btnserch{
+                margin-left: 5px;
+                border-radius: .25rem;
+            }
+</style>
+<% if(user2.status == "SUCCES"){ %>
+    <div style="width: 100%; height: 60px; background-color: #00a6ff;"></div>      
+      <br />
+    <%} else{%>
+      <div style="width: 100%; height: 108px; background-color: #00a6ff;"></div>      
+      <br />
+      <%}%>
+<section class="blog_section destination-section ratio_55">
     <div class="container">
         <div class="vmb-homepage">
             <div class="vmb-help-page">
                 <div class="vmb-helping py-4">
                     <div class="container">
-                        <h1 class="m-0"> MAPS </h1>
+                        <h1 class="m-0"> MAPS </h1><br />
                         <div class="row sub_content">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="maps">
@@ -29,22 +33,22 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <h2>Địa chỉ văn phòng tại Tp.HCM</h2>
+                                <h2>Địa chỉ văn phòng tại Tp.HCM</h2><br />
                                 <ul class="widget_info_contact">
                                     <li>
-                                        <i class="fa fa-map-marked"></i>
+                                        <i class="fas fa-map-marker-alt"></i>
                                         <p>
                                             <strong>Địa chỉ:</strong>
                                             145 Điện Biên Phủ, Đa, Quận 1, Tp.HCM
                                         </p>
-                                    </li>
+                                    </li><br />
                                     <li>
                                         <i class="fa fa-user"></i>
                                         <p>
                                             <strong>Phone:</strong>
                                             0912.228.997 - 0961.938.388 - 0931.038.068
                                         </p>
-                                    </li>
+                                    </li><br />
                                     <li>
                                         <i class="fa fa-envelope"></i>
                                         <p>
@@ -52,23 +56,23 @@
                                             <a href="#">Goldservice@gmail.com</a>
                                         </p>
                                     </li>
-                                </ul>
-                                <h2>Địa chỉ văn phòng tại Hà Nội</h2>
+                                </ul><br />
+                                <h2>Địa chỉ văn phòng tại Hà Nội</h2><br />
                                 <ul class="widget_info_contact">
                                     <li>
-                                        <i class="fa fa-map-marked"></i>
+                                        <i class="fas fa-map-marker-alt"></i>
                                         <p>
                                             <strong>Địa chỉ: </strong>
                                             45 ngõ 185, Chùa Láng, Q.Đống Đa, Tp.Hà Nội
                                         </p>
-                                    </li>
+                                    </li><br />
                                     <li>
                                         <i class="fa fa-user"></i>
                                         <p>
                                             <strong>Phone: </strong>
                                             0912.228.997 - 0961.938.388 - 0931.038.068
                                         </p>
-                                    </li>
+                                    </li><br />
                                     <li>
                                         <i class="fa fa-envelope"></i>
                                         <p>
@@ -76,9 +80,9 @@
                                             <a href="#">Goldservice@gmail.com</a>
                                         </p>
                                     </li>
-                                </ul>
+                                </ul><br />
                                 <form action="~/lien-he" method="post" class="needs-validation">
-                                    <div> <h3 class="vmb-help-border-bt"> Chi tiết </h3></div>
+                                    <div> <h3 class="vmb-help-border-bt"><b> Chi tiết </b></h3></div><br />
                                     <div class="vmb-help-ready-title">
                                         <h5>Vui lòng để lại lời nhắn, chúng tôi sẽ phản hồi cho bạn trong thời gian sớm nhất</h5>
                                     </div>
@@ -95,7 +99,7 @@
                                 </form>
                             </div>
                             <div class="col-md-6">
-                                <h2> Thông tin liên hệ</h2>
+                                <h2> Thông tin liên hệ</h2> <br />
                                 <p>Thắc mắc & góp ý : 19006091</p>
                                 <p>Thắc mắc & góp ý : 19006091</p>
                                 <p>Phàn nàn & khiếu nại: 1900691</p>

@@ -27,14 +27,16 @@
             <th>Loại vé</th>
             <th>Tổng Số kg hành lý</th>
             <th>Tổng giá vé (VNĐ)</th>
+            <th>Trạng thái</th>
             <th></th>
         </thead>
         <tbody>
           <% result.recordset.forEach(function (vemaybay) { %>
+            <% if(vemaybay.TenHang == user2.data.partnerUsername) {%>
             <tr>
               <td>
                 <% if (vemaybay.TenHang=="BamBoo Airways") { %>
-                  <img src="../assets/images/flights/airlines/bamboo_airway.jpg"
+                  <img src="../assets/images/flights/airlines/bamboo_airway.png"
                     class="img-fluid blur-up lazyload" alt="" width="150" height="150">                  
                 <% } 
                 else if (vemaybay.TenHang=="VietNam Airlines") { %>
@@ -56,12 +58,18 @@
                 <% var tonggiave = vemaybay.GiaVe + vemaybay.TienTraThem;
                    var tongsoky = vemaybay.SoKgHanhLy + vemaybay.ThemSoKg; %>
                 <td><%= tongsoky%></td>
-                <td><%= tonggiave  %></td>                
+                <td><%= tonggiave  %></td> 
+                  <% if (vemaybay.TrangThai == "Còn vé"){%>                       
+                      <td style="text-align: center" class="conve"><span style="color: #45e84a"><%= vemaybay.TrangThai %></span></td>                        
+                  <% }else if (vemaybay.TrangThai == "Hết vé"){%>                     
+                      <td style="text-align: center" class="hetve"><span style="color: red"><%= vemaybay.TrangThai %></span></td>                        
+                  <%}%>
                 <td>
                   <a href="/ticket/edit/<%= vemaybay.idVe %>" class="btn btn-primary" style="width: 62px;">Sửa</a>
                   <a href="/ticket/delete/<%= vemaybay.idVe %>" class="btn btn-danger" style="margin-top: 5px;">Xóa</a>
                 </td>
-            </tr>                                   
+            </tr>
+            <%}%>                                   
          <% }) %>
         </tbody>
       </table>

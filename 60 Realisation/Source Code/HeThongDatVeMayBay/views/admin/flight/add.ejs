@@ -133,7 +133,9 @@
           <select class="form-select" aria-label="Default select example" name="idMayBay">
             <option selected disabled="disabled">...</option>
             <% result.recordset.forEach(function (maybay) { %>
+              <% if(maybay.TenHang == user2.data.partnerUsername) {%>
             <option><%= maybay.idMayBay %> <%= maybay.TenMayBay %> &#124; <%= maybay.TenHang %> &#124; <%= maybay.SoLuongKhach %> khách</option>                
+              <%}%>
             <% }) %>
           </select><br />
           <input type="submit" value="Thêm mới" class="btn btn-success mt-2"> <br>

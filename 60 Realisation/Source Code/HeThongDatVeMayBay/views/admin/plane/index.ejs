@@ -24,6 +24,7 @@
         </thead>
         <tbody>
           <% result.recordset.forEach(function (maybay) { %>
+            <% if(maybay.TenHang == user2.data.partnerUsername) {%>
             <tr>  
                 <td><%= maybay.idMayBay %></td>  
                 <td><%= maybay.TenMayBay %></td>
@@ -33,7 +34,8 @@
                   <a href="/plane/edit/<%= maybay.idMayBay %>" class="btn btn-primary">Sửa</a>
                   <a href="/plane/delete/<%= maybay.idMayBay %>" class="btn btn-danger">Xóa</a>
                 </td>
-            </tr>                                   
+            </tr>   
+            <% } %>                                
          <% }) %>
         </tbody>
       </table>

@@ -22,9 +22,11 @@
           <select class="form-select" aria-label="Default select example" name="idChuyenBay">
             <option selected disabled="disabled">...</option>             
             <% result.recordset.forEach(function (chuyenbay) { %>
+              <% if(chuyenbay.TenHang == user2.data.partnerUsername) {%>
             <option><%= chuyenbay.idChuyenBay %> <%= chuyenbay.NgayBay %> &#124; <%= chuyenbay.GioBay %> &#45;&#62; <%= chuyenbay.GioDen %> 
               &#124; <%= chuyenbay.NoiDi %> &#45;&#62; <%= chuyenbay.NoiDen %> &#124; <%= chuyenbay.TenMayBay %> &#124; <%= chuyenbay.TenHang %> &#124;Khách: <%= chuyenbay.SoLuongKhach %></option>                
-            <% }) %>
+              <%}%>
+           <% }) %>
           </select>          
           <label for="SoKgHanhLy">Số Kg hành lý mặc định</label>
           <input type="text" name="SoKgHanhLy" class="form-control">

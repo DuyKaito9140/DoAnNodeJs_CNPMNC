@@ -77,14 +77,32 @@ router.post('/setbody/home', function(req, res, next) {
 router.get('/setbody/booking/:idVe', function(req, res, next) {
   dbconnect.connect().then(() => {
     dbconnect.query(`SELECT * FROM VEMAYBAY v, CHUYENBAY c, LOAIVE l, MAYBAY m, HANGMAYBAY h WHERE v.idLoaiVe = l.idLoaiVe AND v.idChuyenBay = c.idChuyenBay AND c.idMayBay = m.idMayBay AND m.idHang = h.idHang AND idVe = '${req.params.idVe}'`,function(err, result){
-      if(err) throw err;
-      else{
-        console.log(result);
-        console.log(user1);
-        res.render('setbody/booking', {result: result, user1: user1, user2: user2});
-      }
+      dbconnect.query(`SELECT * FROM KHUYENMAI`,function(err, resultkm){
+        if(err) throw err;
+        else{
+          res.render('setbody/booking', {result: result, user1: user1, user2: user2, resultkm: resultkm});
+        }
+      })
     }) 
   })
+});
+//Thanh toan
+router.get('/setbody/bookingsuccess', function(req, res, next) {
+  res.render('setbody/bookingsuccess', {user1: user1, user2: user2});
+});
+
+router.post('/booking/payment', function(req, res, next) { 
+  var iddatve = randomId(len, pattern);
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+  dbconnect.query(`INSERT INTO DATVE_API (idDatVe,idUser2,HoTen2,Email2,Phone2,DiaChi2,Cards,NgayDat,idVe,TienThanhToan)
+   VALUES('${iddatve}','${req.body.idUser2}','${req.body.HoTen2}','${req.body.Email2}','${req.body.Phone2}','${req.body.DiaChi2}','${req.body.Cards}','${date}','${req.body.idVe}','${req.body.TienThanhToan}')`,function(err){
+    dbconnect.query(`UPDATE VEMAYBAY SET TrangThai = N'Hết vé' WHERE idVe = '${req.body.idVe}'`,function(err){
+      if(err) throw err;
+      res.redirect("/setbody/bookingsuccess");
+    })    
+  }) 
 });
 
 //Login
@@ -227,6 +245,17 @@ router.get('/setbody/logout', function(req, res, next) {
     res.redirect("/") 
 });
 
+//History
+router.get('/setbody/history', function(req, res, next) {
+  dbconnect.connect().then(() => {
+    dbconnect.query("SELECT * FROM VEMAYBAY v, CHUYENBAY c, LOAIVE l, MAYBAY m, HANGMAYBAY h, DATVE_API dv WHERE v.idLoaiVe = l.idLoaiVe AND v.idChuyenBay = c.idChuyenBay AND c.idMayBay = m.idMayBay AND m.idHang = h.idHang AND dv.idVe = v.idVe",function(err, result){
+      if(err) throw err;
+      else{
+        res.render('setbody/history', {result: result, user1:user1, user2: user2});
+      }
+    }) 
+  })
+});
 //About
 router.get('/setbody/about', function(req, res, next) {
   res.render('setbody/about', {user1:user1, user2:user2});

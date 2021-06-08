@@ -291,14 +291,19 @@
                     </div>
                     <div class="detail-bar">
                         <% result.recordset.forEach(function (vemaybay) { %>
-                            <div class="detail-wrap wow fadeInUp">
+                            <% if(vemaybay.TrangThai == "Còn vé"){%>
+                                <div class="detail-wrap wow fadeInUp">
+                                <%}
+                            else{%>
+                                <div class="detail-wrap wow fadeInUp" style="background-color: #e9e5e5">
+                            <%}%>                            
                                 <div class="row">
                                     <% var tonggiave = vemaybay.GiaVe + vemaybay.TienTraThem;
                                        var tongsoky = vemaybay.SoKgHanhLy + vemaybay.ThemSoKg; %>
                                     <div class="col-md-2">                            
                                         <div class="logo-sec">
                                             <% if (vemaybay.TenHang=="BamBoo Airways") { %>
-                                                <img src="../assets/images/flights/airlines/bamboo_airway.jpg"
+                                                <img src="../assets/images/flights/airlines/bamboo_airway.png"
                                                 class="img-fluid blur-up lazyload" alt="" >
                                             <% } 
                                             else if (vemaybay.TenHang=="VietNam Airlines") { %>
@@ -344,11 +349,21 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <% if(vemaybay.TrangThai == "Còn vé"){%>
                                     <div class="col-md-3">
                                         <div class="book-flight">
                                             <a href="/setbody/booking/<%= vemaybay.idVe %>" class="btn btn-solid color1 ">book now</a>
                                         </div>
                                     </div>
+                                    <%}
+                                    else{%>
+                                    <div class="col-md-3">
+                                        <div class="book-flight">
+                                            <div style="width: 116px; height: 35px;padding-top: 5px; font-size: 16px; font-weight: 700;
+                                                text-align: center; color: white; background-color: seagreen;">Sold Out</div>                                                
+                                        </div>
+                                    </div>
+                                    <%}%>
                                 </div>
                             </div>                                    
                         <% }) %>                                              

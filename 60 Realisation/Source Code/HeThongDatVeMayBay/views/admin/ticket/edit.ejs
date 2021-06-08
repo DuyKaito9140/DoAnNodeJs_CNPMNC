@@ -32,9 +32,11 @@
         <option selected><%= result.recordset[0].idChuyenBay[0] %> <%= result.recordset[0].NgayBay %> &#124; <%= result.recordset[0].GioBay %> &#45;&#62; <%= result.recordset[0].GioDen %> 
           &#124; <%= result.recordset[0].NoiDi %> &#45;&#62; <%= result.recordset[0].NoiDen %> &#124; <%= result.recordset[0].TenMayBay %> &#124; <%= result.recordset[0].TenHang %> &#124;Khách: <%= result.recordset[0].SoLuongKhach %></option>             
         <% result3.recordset.forEach(function (chuyenbay) { %>
+          <% if(chuyenbay.TenHang == user2.data.partnerUsername) {%>
         <option><%= chuyenbay.idChuyenBay %> <%= chuyenbay.NgayBay %> &#124; <%= chuyenbay.GioBay %> &#45;&#62; <%= chuyenbay.GioDen %> 
           &#124; <%= chuyenbay.NoiDi %> &#45;&#62; <%= chuyenbay.NoiDen %> &#124; <%= chuyenbay.TenMayBay %> &#124; <%= chuyenbay.TenHang %> &#124;Khách: <%= chuyenbay.SoLuongKhach %></option>                
-        <% }) %>
+          <%}%>
+       <% }) %>
       </select>     
       <label for="SoKgHanhLy">Số lượng Kg hành lý mặc định</label>
       <input type="text" name="SoKgHanhLy" value="<%= result.recordset[0].SoKgHanhLy %>" class="form-control">

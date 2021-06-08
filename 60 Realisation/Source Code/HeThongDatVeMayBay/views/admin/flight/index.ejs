@@ -29,6 +29,7 @@
         </thead>
         <tbody>
           <% result.recordset.forEach(function (chuyenbay) { %>
+            <% if(chuyenbay.TenHang == user2.data.partnerUsername) {%>
             <tr>  
               <td><%= chuyenbay.idChuyenBay %></td>
               <td><%= chuyenbay.NgayBay.getDate()%>/<%= chuyenbay.NgayBay.getMonth() + 1%>/<%= chuyenbay.NgayBay.getFullYear()%></td>
@@ -40,9 +41,10 @@
               <td><%= chuyenbay.TenHang %></td>
                 <td>
                   <a href="/flight/edit/<%= chuyenbay.idChuyenBay %>" class="btn btn-primary" style="width: 62px;">Sửa</a>    
-                  <a href="/flight/delete/<%= chuyenbay.idChuyenBay %>" class="btn btn-danger" style="margin-top: 5px;">Xóa</a>
+                  <a href="/flight/delete/<%= chuyenbay.idChuyenBay %>" class="btn btn-danger">Xóa</a>
                 </td>
-            </tr>                                   
+            </tr>  
+            <%}%>                                 
          <% }) %>
         </tbody>
       </table>

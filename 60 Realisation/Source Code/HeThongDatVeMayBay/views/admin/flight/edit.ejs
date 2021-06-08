@@ -144,7 +144,9 @@
       <select class="form-select" aria-label="Default select example" name="idMayBay">
         <option selected><%= result.recordset[0].idMayBay[0] %> <%= result.recordset[0].TenMayBay %> &#124; <%= result.recordset[0].TenHang %> &#124; <%= result.recordset[0].SoLuongKhach %></option>
         <% result2.recordset.forEach(function (maybay) { %>
+          <% if(maybay.TenHang == user2.data.partnerUsername) {%>
         <option><%= maybay.idMayBay %> <%= maybay.TenMayBay %> &#124; <%= maybay.TenHang %> &#124; <%= maybay.SoLuongKhach %> khách</option>                
+          <%}%>
         <% }) %>
       </select><br />
       <input type="submit" value="Cập nhật" class="btn btn-primary mt-2"> <br>
